@@ -3,11 +3,11 @@ CXX ?= c++
 
 override CXXFLAGS := -std=c++17 -Wall -Wextra -pedantic -pedantic-errors
 
-all: part1
+all: part1 part2
 .PHONY: all
 
-part1: part1.cpp
+part1 part2: %: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
 clean:
-	rm -f part1
+	rm -f part1 part2
