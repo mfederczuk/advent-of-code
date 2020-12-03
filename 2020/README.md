@@ -6,5 +6,6 @@ The same language may be used more than once.
 
 * [Day 1](day1) - Bash
 * [Day 2](day2) - C++17
+* [Day 3](day3) - Java
 
 [Advent of Code 2020]: https://adventofcode.com/2020
