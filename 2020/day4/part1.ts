@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 
-let inputFilePath = "example_input";
+let inputFilePath = "part1_example_input";
 if(process.argv.length >= 3) inputFilePath = process.argv[2];
 
 const inputFile = readFileSync(inputFilePath).toString();

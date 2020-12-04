@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"part1": "node_modules/.bin/ts-node part1.ts"
+		"part1": "node_modules/.bin/ts-node part1.ts",
+		"part2": "node_modules/.bin/ts-node part2.ts"
 	},
 	"dependencies": {
 		"@types/node": "^14.14.10",
