@@ -8,5 +8,6 @@ The same language may be used more than once.
 * [Day 2](day2) - C++17
 * [Day 3](day3) - Java
 * [Day 4](day4) - TypeScript
+* [Day 5](day5) - C
 
 [Advent of Code 2020]: https://adventofcode.com/2020
