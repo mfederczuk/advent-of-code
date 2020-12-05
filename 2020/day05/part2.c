@@ -33,9 +33,9 @@ int main(int argc, char** argv) {
 	          min_col, max_col;
 
 	bool ids[128 * 8];
-	memset(ids, false, sizeof(ids) * sizeof(*buf));
+	memset(ids, false, sizeof(ids));
 
-	while(fread(buf, sizeof(*buf), sizeof(buf), f) == sizeof(buf)) {
+	while(fread(buf, sizeof(*buf), (sizeof(buf) / sizeof(*buf)), f) == (sizeof(buf) / sizeof(*buf))) {
 		min_row = 0;
 		max_row = 127;
 		for(i = 0; i < 7; ++i) {
@@ -74,10 +74,10 @@ int main(int argc, char** argv) {
 	i = 0;
 
 	// skip the first few rows that don't exist
-	for(; i < sizeof(ids) && !ids[i]; ++i);
+	for(; i < (sizeof(ids) / sizeof(*ids)) && !ids[i]; ++i);
 
 	// search for our seat
-	for(; i < sizeof(ids) && ids[i]; ++i);
+	for(; i < (sizeof(ids) / sizeof(*ids)) && ids[i]; ++i);
 
 	printf("%zd\n", i);
 
