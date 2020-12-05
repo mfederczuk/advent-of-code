@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
 	          min_col, max_col,
 	          tmp_id;
 
-	while(fread(buf, sizeof(*buf), sizeof(buf), f) == sizeof(buf)) {
+	while(fread(buf, sizeof(*buf), (sizeof(buf) / sizeof(*buf)), f) == (sizeof(buf) / sizeof(*buf))) {
 		min_row = 0;
 		max_row = 127;
 		for(i = 0; i < 7; ++i) {
