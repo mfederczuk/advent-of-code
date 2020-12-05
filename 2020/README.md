@@ -4,10 +4,10 @@ My solutions for [Advent of Code 2020], where every day I'll switch up the
 language used.  
 The same language may be used more than once.
 
-* [Day 1](day1) - Bash
-* [Day 2](day2) - C++17
-* [Day 3](day3) - Java
-* [Day 4](day4) - TypeScript
-* [Day 5](day5) - C
+* [Day 1](day01) - Bash
+* [Day 2](day02) - C++17
+* [Day 3](day03) - Java
+* [Day 4](day04) - TypeScript
+* [Day 5](day05) - C
 
 [Advent of Code 2020]: https://adventofcode.com/2020
