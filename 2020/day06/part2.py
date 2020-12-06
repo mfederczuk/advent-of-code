@@ -22,7 +22,6 @@ if len(sys.argv) >= 2:
 
 with open(input_file, "r") as f:
 	file = f.read()
-	pass
 
 groups = file.split("\n\n")
 
