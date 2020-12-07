@@ -1,5 +1,5 @@
 /*
- * Advent of Code 2020 - Day 7 - Part 1
+ * Advent of Code 2020 - Day 7 - Part 2
  * Copyright (C) 2020  Michael Federczuk
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,12 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
-/*
- * I'mma be honest, I don't try to make the cleanest solutions, I really just try to get things working, but this one,
- * in my opinion, is my worst one so far.
- * Yet it works. _Somehow_.
  */
 
 import { readFileSync } from "fs";
@@ -72,19 +66,20 @@ const bags = inputFile.trim()
 		}, {});
 
 const ourBagColor = "shiny gold";
-const colorsToSearch = [ourBagColor];
 
-let foundNewColor;
-do {
-	foundNewColor = false;
-
-	Object.entries(bags).forEach(([bagColor, childBags]) => {
-		const foundColor = childBags.find(([, childBagColor]) => (colorsToSearch.includes(childBagColor) && !colorsToSearch.includes(bagColor)));
-		if(foundColor !== undefined) {
-			colorsToSearch.push(bagColor);
-			foundNewColor = true;
+/*
+ * I'm sure that there is a better way to do it, but I'm to lazy to keep working on it.
+ * It works, that's all that matters.
+ */
+function countBags(accumulator, bagColor) {
+	const childBags = bags[bagColor];
+	childBags.forEach((childBag) => {
+		for(let i = 0; i < childBag[0]; ++i) {
+			++accumulator;
+			accumulator = countBags(accumulator, childBag[1]);
 		}
 	});
-} while(foundNewColor);
+	return accumulator;
+}
 
-console.log(colorsToSearch.length - 1);
+console.log(countBags(0, ourBagColor));
