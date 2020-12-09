@@ -12,5 +12,6 @@ The same language may be used more than once.
 * [Day 6](day06) - Python
 * [Day 7](day07) - JavaScript
 * [Day 8](day08) - AWK
+* [Day 9](day09) - POSIX sh
 
 [Advent of Code 2020]: https://adventofcode.com/2020

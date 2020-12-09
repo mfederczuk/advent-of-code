@@ -1,0 +1,70 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: set syntax=sh
+# code: language=shellscript
+
+# Advent of Code 2020 - Day 9 - Part 2
+# Copyright (C) 2020  Michael Federczuk
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# similar to the part 1 script, this one takes about ~10min to complete
+
+readonly target_nr="$1" input_file="${2:-example_input}"
+
+add() {
+	echo "$1" + "$2" | bc
+}
+increment() {
+	add "$1" 1
+}
+get_input_file_line() {
+	head -n"$1" "$input_file" | tail -n1
+}
+
+line=1
+
+while true; do
+	i=0
+	tmp_nr=0
+	while [ $i -lt 1 ] || [ $tmp_nr -lt "$target_nr" ]; do
+		tmp_nr=$(add $tmp_nr "$(get_input_file_line "$(add $line $i)")")
+		i=$(increment $i)
+	done
+
+	if [ "$tmp_nr" = "$target_nr" ]; then
+		min=$(echo 2^48 | bc) # the highest number in my input is ~7e13 so 2^48 should be enough for other peoples input
+		max=0
+
+		j=0
+		while [ $j -lt "$i" ]; do
+			nr=$(get_input_file_line "$(add $line "$j")")
+
+			if [ "$nr" -gt $max ]; then
+				max=$nr
+			fi
+			if [ "$nr" -lt "$min" ]; then
+				min=$nr
+			fi
+
+			j=$(increment $j)
+		done
+
+		add "$min" "$max"
+
+		exit
+	fi
+
+	line=$(increment "$line")
+done
