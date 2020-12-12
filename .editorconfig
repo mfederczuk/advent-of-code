@@ -17,3 +17,7 @@ trim_trailing_whitespace = false
 
 [*.diff]
 trim_trailing_whitespace = false
+
+[*.hs]
+indent_style = space
+indent_size = 2
