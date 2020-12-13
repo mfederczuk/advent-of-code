@@ -16,5 +16,6 @@ The same language may be used more than once.
 * [Day 10](day10) - Kotlin
 * [Day 11](day11) - Haxe
 * [Day 12](day12) - Haskell
+* [Day 13](day13) - POSIX sh
 
 [Advent of Code 2020]: https://adventofcode.com/2020
