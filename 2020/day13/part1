@@ -1,0 +1,53 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: set syntax=sh
+# code: language=shellscript
+
+# Advent of Code 2020 - Day 13 - Part 1
+# Copyright (C) 2020  Michael Federczuk
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+readonly input_file="${1:-example_input}"
+
+readonly timestamp=$(head -n1 "$input_file")
+readonly bus_ids=$(head -n2 "$input_file" | tail -n1)
+
+i=1
+while bus_id=$(printf %s "$bus_ids" | cut -d, -f$i) && [ -n "$bus_id" ]; do
+	i=$(echo $i + 1 | bc)
+
+	if [ "$bus_id" = x ]; then
+		bus_times=${bus_times:+$bus_times,}x
+		continue
+	fi
+
+	time=$(echo "$timestamp / $bus_id * $bus_id + $bus_id" | bc)
+	bus_times=${bus_times:+$bus_times,}$time
+done
+
+least_bus_i=-1
+least_time=999999999
+i=1
+while tmp=$(printf %s "$bus_times" | cut -d, -f$i) && [ -n "$tmp" ]; do
+	if [ "$tmp" != x ] && [ "$tmp" -lt $least_time ]; then
+		least_time=$tmp
+		least_bus_i=$i
+	fi
+
+	i=$(echo $i + 1 | bc)
+done
+
+least_bus_id=$(printf %s "$bus_ids" | cut -d, -f$least_bus_i)
+echo "($least_time - $timestamp) * $least_bus_id" | bc
