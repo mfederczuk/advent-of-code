@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+
 # Advent of Code 2020 #
 
 My solutions for [Advent of Code 2020], where every day I'll switch up the

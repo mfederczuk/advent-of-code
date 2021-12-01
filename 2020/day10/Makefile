@@ -1,3 +1,6 @@
+# Copyright (c) 2020 Michael Federczuk
+# SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
+
 SHELL = /bin/sh
 KOTLINC ?= kotlinc
 

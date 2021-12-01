@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+
 # Advent of Code #
 
 My solutions for [Advent of Code] in various languages.

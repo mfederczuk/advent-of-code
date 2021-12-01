@@ -1,3 +1,6 @@
+# Copyright (c) 2021 Michael Federczuk
+# SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
+
 SHELL = /bin/sh
 CXX ?= c++
 
