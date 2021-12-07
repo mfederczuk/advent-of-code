@@ -1,0 +1,30 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: set syntax=sh
+# code: language=shellscript
+
+# Copyright (c) 2021 Michael Federczuk
+# SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
+
+set -o errexit
+
+today="$(date -d today +%s)"
+readonly today
+
+if [ "$(date -d "@$today" +%m)" != '12' ]; then
+	echo "It's not December, sorry bud ¯\_(ツ)_/¯" >&2
+	exit 1
+fi
+
+year_day="$(date -d "@$today" +'%Y/day%d')"
+readonly year_day
+
+root_dir_path="$(dirname -- "$0")"
+root_dir_path="$(realpath -s --relative-to=. -- "$root_dir_path")"
+readonly root_dir_path
+
+day_dir_path="$(realpath -ms --relative-to=. -- "$root_dir_path/$year_day")"
+readonly day_dir_path
+
+mkdir -p -- "$day_dir_path"
+git -C "$root_dir_path" switch -c "$year_day"
