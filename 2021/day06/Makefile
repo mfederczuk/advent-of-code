@@ -15,7 +15,7 @@ override parts := $(shell for part in part1 part2; do if [ -f $(dollar)part.cpp 
 all: $(parts)
 .PHONY: all
 
-$(parts): %: %.cpp
+$(parts): %: %.cpp day06_utils.hpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
 clean:
