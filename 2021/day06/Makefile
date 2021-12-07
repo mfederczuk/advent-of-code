@@ -5,6 +5,7 @@ SHELL = /bin/sh
 CXX ?= c++
 
 CXXFLAGS += -std=c++17 \
+            -Ofast \
             -Wall -Wextra \
             -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
 
