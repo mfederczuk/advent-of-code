@@ -10,5 +10,6 @@ My solutions for [Advent of Code 2021], written in **C++**.
 * [Day  4](day04)
 * [Day  5](day05)
 * [Day  6](day06)
+* [Day  7](day07)
 
 [Advent of Code 2021]: https://adventofcode.com/2021
