@@ -8,23 +8,58 @@
 
 set -o errexit
 
-today="$(date -d today +%s)"
-readonly today
+date="$(date -d "${DATE:-"today"}" +%s)"
+readonly date
 
-if [ "$(date -d "@$today" +%m)" != '12' ]; then
+if [ "$(date -d "@$date" +%m)" != '12' ]; then
 	echo "It's not December, sorry bud ¯\_(ツ)_/¯" >&2
 	exit 1
 fi
 
-year_day="$(date -d "@$today" +'%Y/day%d')"
-readonly year_day
 
 root_dir_path="$(dirname -- "$0")"
 root_dir_path="$(realpath -s --relative-to=. -- "$root_dir_path")"
 readonly root_dir_path
 
-day_dir_path="$(realpath -ms --relative-to=. -- "$root_dir_path/$year_day")"
+
+year="$(date -d "@$date" +%Y)"
+readonly year
+
+day="$(date -d "@$date" +%d)"
+readonly day
+
+
+year_dir_path="$(realpath -ms --relative-to=. -- "$root_dir_path/$year")"
+readonly year_dir_path
+
+day_dir_path="$(realpath -ms --relative-to=. -- "$year_dir_path/day$day")"
 readonly day_dir_path
 
+
+readonly cd_command_string="cd '$day_dir_path'"
+
+
 mkdir -p -- "$day_dir_path"
-git -C "$root_dir_path" switch -c "$year_day"
+git -C "$root_dir_path" switch -c "$year/day$day"
+
+if [ -x "$year_dir_path/init-day" ]; then
+	( cd "$year_dir_path" &&
+		  ./init-day "$day" )
+fi
+
+{
+	echo
+	echo 'Move into the directory with the command:'
+	echo
+	printf '\t%s\n' "$cd_command_string"
+	echo
+} >&2
+
+if command -v xclip > '/dev/null'; then
+	printf -- '%s' "$cd_command_string" | xclip -selection primary -i
+
+	{
+		echo 'The command was also put into the XA_PRIMARY selection.'
+		echo 'Use the middle mouse button to paste the selection.'
+	} >&2
+fi
