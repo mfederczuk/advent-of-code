@@ -7,16 +7,13 @@
 #ifndef AOC_2021_DAY06_DAY06_UTILS_HPP
 #define AOC_2021_DAY06_DAY06_UTILS_HPP
 
-#include <array>
-#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <vector>
 #include <unordered_map>
-#include <limits>
+#include <vector>
 
 /**
  * The "hashing" function for the cached lantern fish timer keys.

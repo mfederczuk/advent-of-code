@@ -6,7 +6,6 @@
 
 #include "day05_utils.hpp"
 #include "line.hpp"
-#include "point.hpp"
 #include <fstream>
 #include <iostream>
 #include <utility>

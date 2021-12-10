@@ -7,7 +7,6 @@
 #include "day09_utils.hpp"
 #include "point.hpp"
 #include <algorithm>
-#include <cstddef>
 #include <fstream>
 #include <functional>
 #include <iostream>

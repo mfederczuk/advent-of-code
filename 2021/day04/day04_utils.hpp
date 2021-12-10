@@ -9,7 +9,6 @@
 
 #include "bingo_board.hpp"
 #include <istream>
-#include <ostream>
 #include <sstream>
 #include <string>
 #include <utility>

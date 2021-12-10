@@ -10,7 +10,6 @@
 #include "point.hpp"
 #include <istream>
 #include <ostream>
-#include <utility>
 
 struct line {
 	class custom_iterator {

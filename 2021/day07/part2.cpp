@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
-#include <fstream>
-#include <vector>
-#include <cstddef>
-#include <limits>
-#include <iostream>
 #include <algorithm>
+#include <cstddef>
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <vector>
 
 [[nodiscard]]
 std::size_t calculate_fuel(const std::vector<int>& crab_positions, int test_position) {

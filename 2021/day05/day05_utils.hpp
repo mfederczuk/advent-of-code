@@ -11,9 +11,8 @@
 #include <algorithm>
 #include <cstddef>
 #include <unordered_map>
+#include <utility>
 #include <vector>
-
-#include <iostream>
 
 std::size_t count_points(const std::vector<line>& lines) {
 	std::unordered_map<point, std::size_t> point_count;
