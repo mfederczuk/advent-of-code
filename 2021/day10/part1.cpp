@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include "day10_utils.hpp"
-#include <fstream>
-#include <iostream>
+#include <istream>
 #include <stack>
 #include <string>
 #include <string_view>
@@ -37,9 +37,7 @@ int calculate_syntax_error_score(const std::string_view line) {
 	return 0;
 }
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	long int syntax_error_score = 0;
 
 	std::string line;
@@ -47,7 +45,5 @@ int main() {
 		syntax_error_score += calculate_syntax_error_score(line);
 	}
 
-	std::cout << syntax_error_score << '\n';
-
-	return 0;
+	return syntax_error_score;
 }

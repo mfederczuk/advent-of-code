@@ -4,9 +4,10 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include "day06_utils.hpp"
+#include <istream>
 
-int main() {
-	print_lantern_fish("input.txt", 256);
-	return 0;
+ANSWER solution(std::istream& input) {
+	return calculate_lantern_fish_population(input, 256);
 }

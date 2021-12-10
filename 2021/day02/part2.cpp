@@ -4,13 +4,11 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
-#include <fstream>
-#include <iostream>
+#include "../aoc2021.hpp"
+#include <istream>
 #include <string>
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	int aim = 0;
 	int horizontal_pos = 0;
 	int depth = 0;
@@ -29,7 +27,5 @@ int main() {
 		}
 	}
 
-	std::cout << (horizontal_pos * depth) << '\n';
-
-	return 0;
+	return (horizontal_pos * depth);
 }

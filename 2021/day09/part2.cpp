@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include "day09_utils.hpp"
 #include "point.hpp"
 #include <algorithm>
-#include <fstream>
 #include <functional>
-#include <iostream>
+#include <istream>
 #include <unordered_set>
 #include <vector>
 
@@ -19,9 +19,7 @@ void determine_basin(
 	const point& starting_point
 );
 
-int main() {
-	std::ifstream input_file("input.txt");
-
+ANSWER solution(std::istream& input_file) {
 	day09_input input;
 	input_file >> input;
 
@@ -46,9 +44,7 @@ int main() {
 		}
 	);
 
-	std::cout << (basins[0].size() * basins[1].size() * basins[2].size()) << '\n';
-
-	return 0;
+	return (basins[0].size() * basins[1].size() * basins[2].size());
 }
 
 void determine_basin(

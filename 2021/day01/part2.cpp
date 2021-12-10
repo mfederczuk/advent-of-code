@@ -4,22 +4,17 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include <cstddef>
-#include <fstream>
-#include <iostream>
+#include <istream>
 #include <limits>
 #include <vector>
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::vector<int> depths;
 	for(int depth; input >> depth; ) {
 		depths.push_back(depth);
 	}
-
-	input.close();
-
 
 	long int prev_sum = std::numeric_limits<long int>::max();
 	long int cur_sum;
@@ -33,7 +28,5 @@ int main() {
 		prev_sum = cur_sum;
 	}
 
-	std::cout << count << '\n';
-
-	return 0;
+	return count;
 }

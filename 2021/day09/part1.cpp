@@ -4,15 +4,13 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include "day09_utils.hpp"
 #include "point.hpp"
 #include <cstddef>
-#include <fstream>
-#include <iostream>
+#include <istream>
 
-int main() {
-	std::ifstream input_file("input.txt");
-
+ANSWER solution(std::istream& input_file) {
 	day09_input input;
 	input_file >> input;
 
@@ -22,7 +20,5 @@ int main() {
 		risk_level += (input.matrix[point.y][point.x] + 1);
 	}
 
-	std::cout << risk_level << '\n';
-
-	return 0;
+	return risk_level;
 }

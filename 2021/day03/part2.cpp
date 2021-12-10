@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include <algorithm>
 #include <cstddef>
-#include <fstream>
 #include <functional>
-#include <iostream>
+#include <istream>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -51,9 +51,7 @@ bool co2_scrubber_rating_bit_criteria(
 [[nodiscard]]
 int find_value(const std::vector<std::string>& binary_numbers, bit_criteria bit_criteria);
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::vector<std::string> binary_numbers;
 	std::string line;
 
@@ -64,7 +62,7 @@ int main() {
 	const int oxygen_generator_rating = find_value(binary_numbers, oxygen_generator_rating_bit_criteria);
 	const int co2_scrubber_rating     = find_value(binary_numbers, co2_scrubber_rating_bit_criteria);
 
-	std::cout << (oxygen_generator_rating * co2_scrubber_rating) << '\n';
+	return (oxygen_generator_rating * co2_scrubber_rating);
 }
 
 

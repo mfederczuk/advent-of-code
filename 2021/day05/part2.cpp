@@ -4,16 +4,14 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include "day05_utils.hpp"
 #include "line.hpp"
-#include <fstream>
-#include <iostream>
+#include <istream>
 #include <utility>
 #include <vector>
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::vector<line> lines;
 
 	line line;
@@ -21,7 +19,5 @@ int main() {
 		lines.emplace_back(std::move(line));
 	}
 
-	std::cout << count_points(lines) << '\n';
-
-	return 0;
+	return count_points(lines);
 }

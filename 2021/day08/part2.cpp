@@ -4,12 +4,11 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include <array>
 #include <cstddef>
 #include <cstdlib>
-#include <fstream>
 #include <functional>
-#include <iostream>
 #include <istream>
 #include <ostream>
 #include <string_view>
@@ -214,9 +213,7 @@ std::size_t entry::calculate_output_value() const noexcept {
 	return value;
 }
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::vector<entry> entries;
 
 	for(entry entry; input >> entry; ) {
@@ -229,7 +226,5 @@ int main() {
 		output_values_sum += entry.calculate_output_value();
 	}
 
-	std::cout << output_values_sum << '\n';
-
-	return 0;
+	return output_values_sum;
 }

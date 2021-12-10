@@ -9,9 +9,7 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <fstream>
-#include <iostream>
-#include <string>
+#include <istream>
 #include <unordered_map>
 #include <vector>
 
@@ -27,11 +25,10 @@ struct same_int {
 
 using cache_map = std::unordered_map<int_fast8_t, std::size_t, same_int<int_fast8_t>>;
 
-void print_lantern_fish(const std::string& input_file, std::size_t day_count) {
+std::size_t calculate_lantern_fish_population(std::istream& input, std::size_t day_count) {
 	cache_map cached_results;
 	cached_results.reserve(7);
 
-	std::ifstream input(input_file);
 	std::size_t total = 0;
 
 	std::vector<int_fast8_t> lantern_fish_timers;
@@ -75,7 +72,7 @@ void print_lantern_fish(const std::string& input_file, std::size_t day_count) {
 		lantern_fish_timers.clear();
 	}
 
-	std::cout << total << '\n';
+	return total;
 }
 
 #endif /* AOC_2021_DAY06_DAY06_UTILS_HPP */

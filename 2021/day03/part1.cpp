@@ -4,17 +4,15 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include <cstddef>
-#include <fstream>
-#include <iostream>
+#include <istream>
 #include <string>
 #include <string_view>
 #include <utility>
 #include <vector>
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::vector<std::string> binary_numbers;
 	std::string line;
 
@@ -23,7 +21,6 @@ int main() {
 	}
 
 	line.clear();
-	input.close();
 
 
 	const std::size_t digit_count = binary_numbers.front().length();
@@ -44,7 +41,5 @@ int main() {
 		nr = (nr << 1) | is_one;
 	}
 
-	std::cout << (nr * (~nr & mask)) << '\n';
-
-	return 0;
+	return (nr * (~nr & mask));
 }

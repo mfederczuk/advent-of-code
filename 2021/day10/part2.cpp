@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include "day10_utils.hpp"
 #include <algorithm>
 #include <cstdint>
-#include <fstream>
-#include <iostream>
+#include <istream>
 #include <optional>
 #include <stack>
 #include <string>
@@ -46,9 +46,7 @@ std::optional<long int> calculate_autocomplete_score(const std::string_view line
 	return score;
 }
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::vector<int_least64_t> autocomplete_scores;
 
 	std::string line;
@@ -65,7 +63,5 @@ int main() {
 
 	const int_least64_t middle_score = autocomplete_scores[(autocomplete_scores.size() - 1) / 2];
 
-	std::cout << middle_score << '\n';
-
-	return 0;
+	return middle_score;
 }

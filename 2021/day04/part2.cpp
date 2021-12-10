@@ -4,17 +4,15 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include "bingo_board.hpp"
 #include "day04_utils.hpp"
 #include <cstddef>
-#include <fstream>
-#include <iostream>
+#include <istream>
 
-int main() {
-	std::ifstream input_stream("input.txt");
-
+ANSWER solution(std::istream& input_file) {
 	day04_input input;
-	input_stream >> input;
+	input_file >> input;
 
 	std::size_t win_count = 0;
 
@@ -29,11 +27,10 @@ int main() {
 			win_count += board.has_bingo();
 
 			if(win_count == input.get_boards().size()) {
-				std::cout << board.calculate_score(nr) << '\n';
-				return 0;
+				return board.calculate_score(nr);
 			}
 		}
 	}
 
-	return 0;
+	return INVALID;
 }

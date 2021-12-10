@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include <algorithm>
 #include <cstddef>
-#include <fstream>
-#include <iostream>
+#include <istream>
 #include <limits>
 #include <vector>
 
@@ -23,9 +23,7 @@ std::size_t calculate_fuel(const std::vector<int>& crab_positions, int test_posi
 	return fuel;
 }
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::vector<int> crab_positions;
 
 	int crab_position;
@@ -48,7 +46,5 @@ int main() {
 		}
 	}
 
-	std::cout << least_fuel << '\n';
-
-	return 0;
+	return least_fuel;
 }

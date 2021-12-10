@@ -9,7 +9,7 @@ override CXXFLAGS += -std=c++17 \
                      -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
 
 override parts := $(basename $(shell find . -type f -path './part[12].cpp'))
-override headers := $(shell find . -type f -name '*.hpp')
+override headers := $(shell find . -type f -name '*.hpp') ../aoc2021.hpp
 
 all: $(parts)
 .PHONY: all

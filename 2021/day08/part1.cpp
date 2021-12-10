@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "../aoc2021.hpp"
 #include <algorithm>
 #include <array>
 #include <cstddef>
-#include <fstream>
-#include <iostream>
+#include <istream>
 #include <sstream>
 #include <string>
 
@@ -25,9 +25,7 @@ constexpr inline bool array_contains(const std::array<T, N>& array, const T& ite
 	return (std::find(array.cbegin(), array.cend(), item_to_find) != array.cend());
 }
 
-int main() {
-	std::ifstream input("input.txt");
-
+ANSWER solution(std::istream& input) {
 	std::size_t count = 0;
 
 	std::string tmp;
@@ -42,7 +40,5 @@ int main() {
 		input.ignore(61);
 	}
 
-	std::cout << count << '\n';
-
-	return 0;
+	return count;
 }
