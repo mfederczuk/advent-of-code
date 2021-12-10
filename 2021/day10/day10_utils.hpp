@@ -13,12 +13,14 @@ struct scope {
 	char open_char;
 	char close_char;
 	int syntax_error_score;
+	int autocomplete_points;
 
 	[[nodiscard]]
-	constexpr inline scope(const char (&open_close_chars)[3], int syntax_error_score) noexcept
+	constexpr inline scope(const char (&open_close_chars)[3], int syntax_error_score, int autocomplete_points) noexcept
 			: open_char(open_close_chars[0]),
 			  close_char(open_close_chars[1]),
-			  syntax_error_score(syntax_error_score) {
+			  syntax_error_score(syntax_error_score),
+			  autocomplete_points(autocomplete_points) {
 	}
 
 	[[nodiscard]]
@@ -35,10 +37,10 @@ struct scope {
 };
 
 constexpr inline const std::array<scope, 4> defined_scopes = {
-	scope {"()",     3},
-	scope {"[]",    57},
-	scope {"{}",  1197},
-	scope {"<>", 25137},
+	scope {"()", /* syntax_error_score: */     3, /* autocomplete_points: */ 1},
+	scope {"[]", /* syntax_error_score: */    57, /* autocomplete_points: */ 2},
+	scope {"{}", /* syntax_error_score: */  1197, /* autocomplete_points: */ 3},
+	scope {"<>", /* syntax_error_score: */ 25137, /* autocomplete_points: */ 4},
 };
 
 #endif /* AOC_2021_DAY10_DAY10_UTILS_HPP */
