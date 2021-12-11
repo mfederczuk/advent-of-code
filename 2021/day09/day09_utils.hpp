@@ -7,50 +7,13 @@
 #ifndef AOC_2021_DAY09_DAY09_UTILS_HPP
 #define AOC_2021_DAY09_DAY09_UTILS_HPP
 
+#include "../optional_reference.hpp"
 #include "point.hpp"
 #include <cstddef>
 #include <istream>
 #include <ostream>
 #include <string>
 #include <vector>
-
-template<typename T>
-class optional_reference final {
-	private:
-		T* ptr;
-
-	public:
-		[[nodiscard]]
-		constexpr inline optional_reference() noexcept : ptr(nullptr) {}
-
-		[[nodiscard]]
-		inline optional_reference(T& value) noexcept : ptr(&value) {}
-
-
-		inline optional_reference& operator=(T& value) noexcept {
-			this->ptr = &value;
-			return *this;
-		}
-
-
-		[[nodiscard]]
-		constexpr inline bool has_value() const noexcept {
-			return (ptr != nullptr);
-		}
-
-		[[nodiscard]]
-		inline T& get() noexcept {
-			return *ptr;
-		}
-		[[nodiscard]]
-		inline const T& get() const noexcept {
-			return *ptr;
-		}
-
-		constexpr inline void reset() noexcept {
-			ptr = nullptr;
-		}
-};
 
 struct day09_input {
 	private:
