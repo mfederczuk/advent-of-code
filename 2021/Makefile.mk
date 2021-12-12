@@ -8,14 +8,22 @@ override CXXFLAGS += -std=c++17 \
                      -Wall -Wextra \
                      -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
 
-override parts := $(basename $(shell find . -type f -path './part[12].cpp'))
+
+override part_sources  := $(notdir $(shell find . -maxdepth 1 -type f                    -name 'part[12].cpp' | sort))
+override other_sources := $(notdir $(shell find . -maxdepth 1 -type f -name '*.cpp' -not -name 'part[12].cpp' | sort))
+
 override headers := $(shell find . -type f -name '*.hpp') ../aoc2021.hpp
 
-all: $(parts)
+override part_targets  := $(basename $(part_sources))
+override other_targets := $(basename $(other_sources))
+override targets := $(part_targets) $(other_targets)
+
+
+all: $(targets)
 .PHONY: all
 
-$(parts): %: %.cpp $(headers)
+$(targets): %: %.cpp $(headers)
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
 clean:
-	rm -fv part1 part2
+	rm -fv part1 part2 $(other_targets)
