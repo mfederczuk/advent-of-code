@@ -1,0 +1,39 @@
+#!/bin/sh
+# -*- sh -*-
+# vim: set syntax=sh
+# code: language=shellscript
+
+# Copyright (c) 2021 Michael Federczuk
+# SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
+
+set -o errexit
+
+root_dir_path="$(dirname -- "$0")"
+root_dir_path="$(realpath -s --relative-to=. -- "$root_dir_path")"
+readonly root_dir_path
+
+cd "$root_dir_path"
+
+for day in $(printf '%s\n' 'day'[01][0-9] | sort | sed -E s/'^day([[:digit:]]{2})$'/'\1'/); do
+	day_dir="day$day"
+
+	if ! cd "$day_dir"; then
+		continue
+	fi
+
+	set +o errexit
+
+	echo "================ Day $day ================" >&2 &&
+		{ make clean &&
+			  { echo >&2; make all; } &&
+			  { echo >&2
+			    printf 'Part 1: ' >&2 && ./part1;
+			    printf 'Part 2: ' >&2 && ./part2; }
+		  echo '==========================================' >&2; }
+
+	cd .. || exit
+
+	printf '\n\n\n' >&2
+
+	set -o errexit || exit
+done
