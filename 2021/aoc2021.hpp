@@ -11,31 +11,31 @@
 #include <iostream>
 #include <istream>
 
+namespace aoc2021 {
+	constexpr inline const struct {} INVALID;
 
-constexpr inline const struct {} INVALID;
-
-inline std::ostream& operator<<(std::ostream& stream, const decltype(INVALID)&) {
-	return (stream << "INVALID");
-}
-
-struct ANSWER final {
-	ANSWER() = delete;
-	ANSWER(const ANSWER&) = delete;
-	ANSWER(ANSWER&&) = delete;
-
-	template<typename ValueT>
-	[[nodiscard]]
-	inline ANSWER(const ValueT& value) {
-		std::cout << value << '\n';
+	inline std::ostream& operator<<(std::ostream& stream, const decltype(INVALID)&) {
+		return (stream << "INVALID");
 	}
 
-	ANSWER& operator=(const ANSWER&) = delete;
-	ANSWER& operator=(ANSWER&&) = delete;
-};
+	struct ANSWER final {
+		ANSWER() = delete;
+		ANSWER(const ANSWER&) = delete;
+		ANSWER(ANSWER&&) = delete;
+
+		template<typename ValueT>
+		[[nodiscard]]
+		inline ANSWER(const ValueT& value) {
+			std::cout << value << '\n';
+		}
+
+		ANSWER& operator=(const ANSWER&) = delete;
+		ANSWER& operator=(ANSWER&&) = delete;
+	};
 
 
-ANSWER solution(std::istream& input);
-
+	ANSWER solution(std::istream& input);
+}
 
 int main(const int argc, const char* const* const argv) {
 	if(argc > 2) {
@@ -61,7 +61,7 @@ int main(const int argc, const char* const* const argv) {
 		return 48;
 	}
 
-	solution(input);
+	aoc2021::solution(input);
 
 	return 0;
 }

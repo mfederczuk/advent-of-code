@@ -7,6 +7,6 @@
 #include "../aoc2021.hpp"
 #include <istream>
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	return INVALID; // TODO
 }

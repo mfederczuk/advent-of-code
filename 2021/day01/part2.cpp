@@ -10,7 +10,7 @@
 #include <limits>
 #include <vector>
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::vector<int> depths;
 	for(int depth; input >> depth; ) {
 		depths.push_back(depth);

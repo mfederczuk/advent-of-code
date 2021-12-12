@@ -8,6 +8,6 @@
 #include "day06_utils.hpp"
 #include <istream>
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	return calculate_lantern_fish_population(input, 80);
 }

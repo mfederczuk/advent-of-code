@@ -8,7 +8,7 @@
 #include <istream>
 #include <string>
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	int aim = 0;
 	int horizontal_pos = 0;
 	int depth = 0;

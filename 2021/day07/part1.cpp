@@ -23,7 +23,7 @@ std::size_t calculate_fuel(const std::vector<int>& crab_positions, int test_posi
 	return fuel;
 }
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::vector<int> crab_positions;
 
 	int crab_position;

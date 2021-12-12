@@ -213,7 +213,7 @@ std::size_t entry::calculate_output_value() const noexcept {
 	return value;
 }
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::vector<entry> entries;
 
 	for(entry entry; input >> entry; ) {

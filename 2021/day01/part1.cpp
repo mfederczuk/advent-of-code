@@ -9,7 +9,7 @@
 #include <istream>
 #include <limits>
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	int prev_depth = std::numeric_limits<decltype(prev_depth)>::max();
 	int cur_depth;
 	std::size_t count = 0;

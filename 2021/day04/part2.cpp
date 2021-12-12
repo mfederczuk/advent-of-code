@@ -10,7 +10,7 @@
 #include <cstddef>
 #include <istream>
 
-ANSWER solution(std::istream& input_file) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input_file) {
 	day04_input input;
 	input_file >> input;
 

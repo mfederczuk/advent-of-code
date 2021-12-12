@@ -78,7 +78,7 @@ std::size_t invoke_flash_process(
 	return flashes;
 }
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::array<std::array<octopus, 10>, 10> rows;
 
 	char ch;

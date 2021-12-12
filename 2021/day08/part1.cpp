@@ -25,7 +25,7 @@ constexpr inline bool array_contains(const std::array<T, N>& array, const T& ite
 	return (std::find(array.cbegin(), array.cend(), item_to_find) != array.cend());
 }
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::size_t count = 0;
 
 	std::string tmp;

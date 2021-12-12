@@ -51,7 +51,7 @@ bool co2_scrubber_rating_bit_criteria(
 [[nodiscard]]
 int find_value(const std::vector<std::string>& binary_numbers, bit_criteria bit_criteria);
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::vector<std::string> binary_numbers;
 	std::string line;
 

@@ -19,7 +19,7 @@ void determine_basin(
 	const point& starting_point
 );
 
-ANSWER solution(std::istream& input_file) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input_file) {
 	day09_input input;
 	input_file >> input;
 

@@ -37,7 +37,7 @@ int calculate_syntax_error_score(const std::string_view line) {
 	return 0;
 }
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	long int syntax_error_score = 0;
 
 	std::string line;

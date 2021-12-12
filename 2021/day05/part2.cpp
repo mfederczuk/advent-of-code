@@ -11,7 +11,7 @@
 #include <utility>
 #include <vector>
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::vector<line> lines;
 
 	line line;

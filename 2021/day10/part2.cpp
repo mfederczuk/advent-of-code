@@ -46,7 +46,7 @@ std::optional<long int> calculate_autocomplete_score(const std::string_view line
 	return score;
 }
 
-ANSWER solution(std::istream& input) {
+aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::vector<int_least64_t> autocomplete_scores;
 
 	std::string line;
