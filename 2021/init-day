@@ -18,6 +18,9 @@ readonly root_dir_path
 makefile_template_path="$(realpath -s --relative-to=. -- "$root_dir_path/Makefile_template.mk")"
 readonly makefile_template_path
 
+part1_source_file_template_path="$(realpath -s --relative-to=. -- "$root_dir_path/part1_template.cpp")"
+readonly part1_source_file_template_path
+
 day_dir_path="$(realpath -s --relative-to=. -- "$root_dir_path/day$1")"
 readonly day_dir_path
 
@@ -25,13 +28,15 @@ readonly day_dir_path
 makefile_path="$(realpath -ms --relative-to=. -- "$day_dir_path/Makefile")"
 readonly makefile_path
 
-example_input_file_path="$(realpath -ms --relative-to=. -- "$day_dir_path/example_input.txt")"
-readonly example_input_file_path
-
 part1_source_file_path="$(realpath -ms --relative-to=. -- "$day_dir_path/part1.cpp")"
 readonly part1_source_file_path
 
+example_input_file_path="$(realpath -ms --relative-to=. -- "$day_dir_path/example_input.txt")"
+readonly example_input_file_path
 
 
-cp -- "$makefile_template_path" "$makefile_path"
-touch -- "$example_input_file_path" "$part1_source_file_path"
+
+cp -- "$makefile_template_path"          "$makefile_path"
+cp -- "$part1_source_file_template_path" "$part1_source_file_path"
+
+touch -- "$example_input_file_path"
