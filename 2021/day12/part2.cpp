@@ -16,6 +16,6 @@ aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	return find_correct_paths_count(
 		system.start_cave(),
 		path {},
-		small_cave_visit_policy::every_once
+		small_cave_visit_policy::single_twice_other_once
 	);
 }
