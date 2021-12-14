@@ -56,38 +56,32 @@ struct day14_input {
 	}
 
 	std::size_t get_result_after_n_insertions(const std::size_t n) const {
-		std::string polymer = polymer_template;
+		// gotta say, I'm actually quite proud of this solution
 
-		std::string new_polymer;
-
-		for(std::size_t ni = 0; ni < n; ++ni) {
-			new_polymer += polymer[0];
-
-			for(std::size_t i = 0; i < (polymer.size() - 1); ++i) {
-				const char a = polymer[i + 0];
-				const char b = polymer[i + 1];
-
-				if(insertion_rules.count({a, b}) > 0) {
-					new_polymer += insertion_rules.at({a, b});
-				}
-
-				new_polymer += b;
-			}
-
-			polymer = std::move(new_polymer);
-		}
-
+		std::unordered_map<  std::pair<char, char>,  std::size_t,  char_pair_hash  > pair_counts, new_pair_counts;
 		std::unordered_map<char, std::size_t> element_counts;
 
-		for(const char element : polymer) {
-			if(element_counts.count(element) > 0) {
-				continue;
+		element_counts.emplace(polymer_template.front(), 1);
+
+		for(std::size_t i = 0; i < (polymer_template.size() - 1); ++i) {
+			const char left = polymer_template[i + 0];
+			const char right = polymer_template[i + 1];
+
+			++(pair_counts[{left, right}]);
+			++(element_counts[right]);
+		}
+
+		for(std::size_t i = 0; i < n; ++i) {
+			for(const auto& [pair, count] : pair_counts) {
+				const char insertion_char = insertion_rules.at(pair);
+
+				new_pair_counts[{pair.first,  insertion_char}] += count;
+				new_pair_counts[{insertion_char, pair.second}] += count;
+
+				element_counts[insertion_char] += count;
 			}
 
-			element_counts.emplace(
-				element,
-				std::count(polymer.cbegin(), polymer.cend(), element)
-			);
+			pair_counts = std::move(new_pair_counts);
 		}
 
 		const auto [min_it, max_it] =
