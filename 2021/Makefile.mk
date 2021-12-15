@@ -5,7 +5,7 @@ SHELL = /bin/sh
 CXX ?= c++
 
 override CXXFLAGS += -std=c++17 \
-                     -Wall -Wextra \
+                     -Wall -Wextra -Wno-unknown-pragmas \
                      -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
 
 
