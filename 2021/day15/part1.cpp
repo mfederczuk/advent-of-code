@@ -57,7 +57,6 @@ void find_optimal_path(
 ) {
 	const std::size_t max_y = cave.max_y();
 
-	const std::size_t optimal_path_risk = calculate_path_risk(cave, optimal_path);
 	const std::size_t current_path_risk = calculate_path_risk(cave, current_path);
 
 	const point& current_point = current_path.back();
@@ -65,7 +64,7 @@ void find_optimal_path(
 
 	// check if we're at the destination point
 	if(current_point == point {cave.max_x(max_y), max_y}) {
-		if(current_path_risk < optimal_path_risk) {
+		if(current_path_risk < calculate_path_risk(cave, optimal_path)) {
 			optimal_path = current_path;
 		}
 
@@ -125,7 +124,7 @@ void find_optimal_path(
 		const std::size_t next_path_risk = (current_path_risk + next_point_risk_level);
 
 		if((next_path_risk >= cached_points[next_point]) ||
-		   (next_path_risk >= optimal_path_risk)) {
+		   (next_path_risk >= calculate_path_risk(cave, optimal_path))) {
 
 			// when we come in here, than we're already worse off than a different run, we can break it off now
 			continue;
