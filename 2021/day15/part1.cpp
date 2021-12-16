@@ -76,6 +76,11 @@ void find_optimal_path(
 	cached_points[current_point] = current_path_risk;
 
 
+	// which next points we move towards is optimized by prediction:
+	// 1. either right or down, whichever has a smaller risk level
+	// 2. down or right, whichever was not chosen in the last step
+	// 3. left
+	// 4. up
 	std::vector<point> next_points_to_consider;
 
 	// checking right point
@@ -91,6 +96,14 @@ void find_optimal_path(
 
 		next_points_to_consider.push_back({current_point.x, current_point.y + 1});
 	}
+
+	std::sort(
+		next_points_to_consider.begin(),
+		next_points_to_consider.end(),
+		[&cave](const point& p1, const point& p2) -> bool {
+			return (cave[p1.y][p1.x] < cave[p2.y][p2.x]);
+		}
+	);
 
 	// checking left point
 	if(!(cave.is_at_left_edge(current_point.x)) &&
