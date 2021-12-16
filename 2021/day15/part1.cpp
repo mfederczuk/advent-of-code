@@ -27,10 +27,6 @@ struct point_size_pair_hash final {
 
 [[nodiscard]]
 std::size_t calculate_path_risk(const matrix& cave, const std::vector<point>& path) {
-	if(path.empty()) {
-		return std::numeric_limits<std::size_t>::max();
-	}
-
 	std::size_t total_risk = 0;
 
 	std::for_each(
@@ -52,6 +48,7 @@ bool has_visited_point(const std::vector<point>& path, const point& point) {
 void find_optimal_path(
 	const matrix& cave,
 	std::vector<point>& optimal_path,
+	std::size_t& optimal_path_risk,
 	std::unordered_map<point, std::size_t>& cached_points,
 	const std::vector<point>& current_path
 ) {
@@ -65,8 +62,9 @@ void find_optimal_path(
 
 	// check if we're at the destination point
 	if(current_point == point {max_x, max_y}) {
-		if(current_path_risk < calculate_path_risk(cave, optimal_path)) {
+		if(current_path_risk < optimal_path_risk) {
 			optimal_path = current_path;
+			optimal_path_risk = current_path_risk;
 		}
 
 		return;
@@ -127,7 +125,7 @@ void find_optimal_path(
 		const std::size_t end_manhatten_distance = (max_y - next_point.y) + (max_x - next_point.x);
 
 		if((next_path_risk >= cached_points[next_point]) ||
-		   ((next_path_risk + end_manhatten_distance) >= calculate_path_risk(cave, optimal_path))) {
+		   ((next_path_risk + end_manhatten_distance) >= optimal_path_risk)) {
 
 			// when we come in here, than we're already worse off than a different run, we can break it off now
 			continue;
@@ -136,7 +134,7 @@ void find_optimal_path(
 		std::vector<point> next_path = current_path;
 		next_path.push_back(next_point);
 
-		find_optimal_path(cave, optimal_path, cached_points, next_path);
+		find_optimal_path(cave, optimal_path, optimal_path_risk, cached_points, next_path);
 	}
 }
 
@@ -145,6 +143,7 @@ aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	input >> cave;
 
 	std::vector<point> optimal_path;
+	std::size_t optimal_path_risk;
 
 	// when we get to a cached point, and the risk in it is lower than the current risk, then we know that from this
 	// point onward, we will not be able to get the optimal path
@@ -158,7 +157,7 @@ aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 		}
 	}
 
-	find_optimal_path(cave, optimal_path, cached_points, {{0, 0}});
+	find_optimal_path(cave, optimal_path, optimal_path_risk, cached_points, {{0, 0}});
 
-	return calculate_path_risk(cave, optimal_path);
+	return optimal_path_risk;
 }
