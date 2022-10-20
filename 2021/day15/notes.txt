@@ -1,0 +1,21 @@
+Notes:
+
+move N spaces (where N > 1), pause here, and go back to before these N spaces were moved
+take the next possible way (that wasn't just moved towards) and continue here, again just moving N spaces
+
+compare these two results; continue wherever is less risk, and queue the other to do after we're done with this new one
+
+
+N = 5 seems to be a good number, which (in theory) should decrease the time taken for both the example- and the real
+input by a significant margin
+this number may need a bit of tweaking though
+
+
+
+
+
+(0, 0)
+`---(1, 0)
+|   `---(1, 1)
+|   |   `---(1, 2)
+|   |   |   `---(2, 2)
