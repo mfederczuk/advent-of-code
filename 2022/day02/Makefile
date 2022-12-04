@@ -12,12 +12,12 @@ override headers != find . -mindepth 1 -type f -name '*.h'
 
 .SUFFIXES:
 
-all: part1
+all: part1 part2
 .PHONY: all
 
-part1: $(headers) part1.c
+part1 part2: %: $(headers) %.c
 	$(strip $(CC) $(CFLAGS) $(lastword $^) -o $@)
 
 clean:
-	rm -f part1
+	rm -f part2 part1
 .PHONY: clean

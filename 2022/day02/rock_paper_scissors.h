@@ -36,6 +36,19 @@ static inline enum rps_1v1_round_outcome rps_determine_1v1_round_outcome(const e
 	return WIN;
 }
 
+static inline enum rps_throw rps_determine_1v1_round_player_throw(const enum rps_throw opponent_throw,
+                                                                  const enum rps_1v1_round_outcome outcome) {
+	if (outcome == DRAW) {
+		return opponent_throw;
+	}
+
+	if (outcome == LOOSE) {
+		return (enum rps_throw)((opponent_throw + 2) % 3);
+	}
+
+	return (enum rps_throw)((opponent_throw + 1) % 3);
+}
+
 static inline rps_score_t rps_calc_1v1_round_player_score(const enum rps_throw player_throw,
                                                           const enum rps_1v1_round_outcome outcome) {
 	rps_score_t throw_score;
