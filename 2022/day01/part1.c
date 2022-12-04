@@ -9,6 +9,7 @@
 
 #include "large_string_io.h"
 #include "large_string_iter.h"
+#include "vector_size_t.h"
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -16,12 +17,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define GENERIC_VECTOR_ELEMENT_TYPE size_t
-#define GENERIC_VECTOR_NAME size_t
-#include "generic_vector.h"
-#undef GENERIC_VECTOR_NAME
-#undef GENERIC_VECTOR_ELEMENT_TYPE
 
 int main(int argc, char** argv) {
 	if (argc < 2) {
