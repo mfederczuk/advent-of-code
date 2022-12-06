@@ -3,21 +3,12 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
+#include "common.h"
 #include "dynamic_sso_string.h"
 #include "file_line_iter.h"
 #include "string_view_io.h"
 #include "string_view.h"
 #include <stdio.h>
-
-typedef size_t prio_t;
-
-static prio_t get_item_type_priority(const char item_type) {
-	if ((item_type >= 'a') && (item_type <= 'z')) {
-		return (prio_t)((item_type - 'a') + 1);
-	}
-
-	return (prio_t)((item_type - 'A') + 27);
-}
 
 int main(const int argc, const char* const* argv) {
 	if (argc < 2) {

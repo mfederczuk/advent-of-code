@@ -15,8 +15,8 @@ struct string_view {
 	char* end;
 };
 
-#define STRING_VIEW_INVALID  ((struct string_view){ .begin = NULL })
 
+#define STRING_VIEW_INVALID  ((struct string_view){ .begin = NULL })
 
 static inline bool string_view_is_invalid(const struct string_view sv) {
 	return (sv.begin == NULL);
