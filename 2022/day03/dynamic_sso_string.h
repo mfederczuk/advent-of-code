@@ -120,6 +120,13 @@ static inline bool dynamic_sso_string_is_not_empty(const struct dynamic_sso_stri
 	return !(dynamic_sso_string_is_empty(s));
 }
 
+static inline char dynamic_sso_string_at(const struct dynamic_sso_string* const s, const size_t index) {
+	assert(dynamic_sso_string_is_valid(s));
+	assert((s->size > 0) && (index < s->size));
+
+	return dynamic_sso_string_data_ptr(s)[index];
+}
+
 static inline size_t dynamic_sso_string_find_first_index_of_char(const struct dynamic_sso_string* const s,
                                                                  const char ch,
                                                                  const size_t begin_index,
@@ -145,6 +152,15 @@ static inline size_t dynamic_sso_string_find_first_index_of_char(const struct dy
 	}
 
 	return (size_t)-1;
+}
+
+static inline bool dynamic_sso_string_contains_char(const struct dynamic_sso_string* const s,
+                                                    const char ch,
+                                                    const size_t begin_index,
+                                                    const size_t end_index) {
+	assert(dynamic_sso_string_is_valid(s));
+
+	return (dynamic_sso_string_find_first_index_of_char(s, ch, begin_index, end_index) != (size_t)-1);
 }
 
 
