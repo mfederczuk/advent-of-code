@@ -7,6 +7,7 @@
 #define YEAR2022_DAY03_DYNAMIC_SSO_STRING_H
 
 #include "string_view.h"
+#include <assert.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -29,6 +30,17 @@ struct dynamic_sso_string {
 		char* allocated_ptr;
 	} data;
 };
+
+
+#define DYNAMIC_SSO_STRING_INVALID  ((struct dynamic_sso_string){ .capacity = 0 })
+
+static inline bool dynamic_sso_string_is_invalid(const struct dynamic_sso_string* const s) {
+	return (s->capacity == 0);
+}
+
+static inline bool dynamic_sso_string_is_valid(const struct dynamic_sso_string* const s) {
+	return !(dynamic_sso_string_is_invalid(s));
+}
 
 
 static inline void dynamic_sso_string_init_empty(struct dynamic_sso_string* const s) {
@@ -76,6 +88,8 @@ static inline int dynamic_sso_string_init_from_buf(struct dynamic_sso_string* co
 }
 
 static inline void dynamic_sso_string_destroy(struct dynamic_sso_string* const s) {
+	assert(dynamic_sso_string_is_valid(s));
+
 	if (s->capacity <= DYNAMIC_SSO_STRING_ARRAY_SIZE) {
 		return;
 	}
@@ -85,6 +99,8 @@ static inline void dynamic_sso_string_destroy(struct dynamic_sso_string* const s
 
 
 static inline char* dynamic_sso_string_data_ptr(const struct dynamic_sso_string* const s) {
+	assert(dynamic_sso_string_is_valid(s));
+
 	if (s->capacity <= DYNAMIC_SSO_STRING_ARRAY_SIZE) {
 		return (char*)(s->data.array);
 	}
@@ -93,10 +109,14 @@ static inline char* dynamic_sso_string_data_ptr(const struct dynamic_sso_string*
 }
 
 static inline bool dynamic_sso_string_is_empty(const struct dynamic_sso_string* const s) {
+	assert(dynamic_sso_string_is_valid(s));
+
 	return (s->size > 0);
 }
 
 static inline bool dynamic_sso_string_is_not_empty(const struct dynamic_sso_string* const s) {
+	assert(dynamic_sso_string_is_valid(s));
+
 	return !(dynamic_sso_string_is_empty(s));
 }
 
@@ -104,6 +124,8 @@ static inline size_t dynamic_sso_string_find_first_index_of_char(const struct dy
                                                                  const char ch,
                                                                  const size_t begin_index,
                                                                  size_t end_index) {
+	assert(dynamic_sso_string_is_valid(s));
+
 	if ((begin_index >= end_index) ||
 	    (begin_index >= s->size)) {
 
@@ -127,6 +149,8 @@ static inline size_t dynamic_sso_string_find_first_index_of_char(const struct dy
 
 
 static inline int dynamic_sso_string_reserve(struct dynamic_sso_string* const s, const size_t required_capacity) {
+	assert(dynamic_sso_string_is_valid(s));
+
 	if ((s->capacity >= required_capacity) || (required_capacity <= DYNAMIC_SSO_STRING_ARRAY_SIZE)) {
 		return 0;
 	}
@@ -161,6 +185,8 @@ static inline int dynamic_sso_string_reserve(struct dynamic_sso_string* const s,
 }
 
 static inline int dynamic_sso_string_append_char(struct dynamic_sso_string* const s, const char ch) {
+	assert(dynamic_sso_string_is_valid(s));
+
 	if (dynamic_sso_string_reserve(s, (s->size + 1)) != 0) {
 		return 1;
 	}
@@ -176,6 +202,7 @@ static inline int dynamic_sso_string_append_char(struct dynamic_sso_string* cons
 static inline int dynamic_sso_string_append_buf(struct dynamic_sso_string* const s,
                                                 const char* const buf,
                                                 const size_t buf_size) {
+	assert(dynamic_sso_string_is_valid(s));
 
 	if (dynamic_sso_string_reserve(s, (s->size + buf_size)) != 0) {
 		return 1;
@@ -191,6 +218,10 @@ static inline int dynamic_sso_string_append_buf(struct dynamic_sso_string* const
 
 
 static inline struct string_view dynamic_sso_string_as_string_view(const struct dynamic_sso_string* const s) {
+	if (dynamic_sso_string_is_invalid(s)) {
+		return STRING_VIEW_INVALID;
+	}
+
 	char* const data_ptr = dynamic_sso_string_data_ptr(s);
 
 	return (struct string_view){
