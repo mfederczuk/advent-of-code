@@ -8,5 +8,6 @@ My solutions for [Advent of Code 2022], written in **C**.
 * [Day  2](day02)
 * [Day  3](day03)
 * [Day  4](day04)
+* [Day  5](day05)
 
 [Advent of Code 2022]: https://adventofcode.com/2022
