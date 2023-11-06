@@ -7,6 +7,7 @@
 #ifndef AOC_2021_DAY09_DAY09_UTILS_HPP
 #define AOC_2021_DAY09_DAY09_UTILS_HPP
 
+#include "../basic_matrix.hpp"
 #include "../optional_reference.hpp"
 #include "point.hpp"
 #include <cstddef>
@@ -29,19 +30,19 @@ struct day09_input {
 		}
 
 	public:
-		std::vector<std::vector<int>> matrix;
+		basic_matrix<int> matrix;
 
 		[[nodiscard]]
 		std::vector<point> find_low_points() const {
 			std::vector<point> points;
 
-			for(std::size_t y = 0; y < matrix.size(); ++y) {
+			for(std::size_t y = 0; y < matrix.rows_count(); ++y) {
 				optional_reference<const std::vector<int>> upper_row;
 				const std::vector<int>& row = matrix[y];
 				optional_reference<const std::vector<int>> lower_row;
 
 				if(y > 0) upper_row = matrix[y - 1];
-				if((y + 1) < matrix.size()) lower_row = matrix[y + 1];
+				if((y + 1) < matrix.rows_count()) lower_row = matrix[y + 1];
 
 				for(std::size_t x = 0; x < row.size(); ++x) {
 					const int height = row[x];
@@ -64,11 +65,11 @@ struct day09_input {
 			std::string line;
 
 			while(std::getline(stream, line)) {
-				input.matrix.emplace_back(/* empty vector */);
-				input.matrix.back().reserve(line.length());
+				input.matrix.rows().emplace_back(/* empty vector */);
+				input.matrix.rows().back().reserve(line.length());
 
 				for(const char ch : line) {
-					input.matrix.back().push_back(ascii_digit_to_int(ch));
+					input.matrix.rows().back().push_back(ascii_digit_to_int(ch));
 				}
 			}
 
@@ -76,8 +77,8 @@ struct day09_input {
 		}
 
 		friend std::ostream& operator<<(std::ostream& stream, const day09_input& input) {
-			if(!input.matrix.empty()) {
-				print_row(stream, input.matrix.front());
+			if(!input.matrix.rows().empty()) {
+				print_row(stream, input.matrix.rows().front());
 			}
 
 			for(const std::vector<int>& row : input.matrix) {

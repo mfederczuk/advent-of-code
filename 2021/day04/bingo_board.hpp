@@ -14,6 +14,43 @@
 #include <iomanip>
 #include <istream>
 #include <ostream>
+#include "../basic_matrix.hpp"
+
+class tile {
+	private:
+		int nr;
+		bool marked = false;
+
+	public:
+		[[nodiscard]]
+		explicit constexpr tile(int nr = 0) : nr(nr) {}
+
+		[[nodiscard]]
+		constexpr int get_nr() const {
+			return nr;
+		}
+		[[nodiscard]]
+		constexpr bool is_marked() const {
+			return marked;
+		}
+
+		constexpr void set_nr(int nr) {
+			this->nr = nr;
+		}
+		constexpr void mark() {
+			marked = true;
+		}
+
+		friend std::istream& operator>>(std::istream& stream, tile& tile) {
+			return (stream >> tile.nr);
+		}
+
+		friend std::ostream& operator<<(std::ostream& stream, tile tile) {
+			return (stream << std::setw(2) << std::setfill(' ') << tile.nr);
+		}
+};
+
+class bingo_board_ : basic_matrix<tile, std::array<tile, 5>, std::array<std::array<tile, 5>, 5>> {};
 
 class bingo_board {
 	private:

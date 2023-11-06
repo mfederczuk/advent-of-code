@@ -5,6 +5,7 @@
  */
 
 #include "../aoc2021.hpp"
+#include "../basic_matrix.hpp"
 #include "../optional_reference.hpp"
 #include <array>
 #include <cstddef>
@@ -23,12 +24,12 @@ struct octopus {
 };
 
 std::size_t invoke_flash_process(
-	std::array<std::array<octopus, 10>, 10>& rows,
+	array_matrix<octopus, 10>& matrix,
 	std::size_t x,
 	std::size_t y,
 	bool increment
 ) {
-	octopus& octopus = rows[y][x];
+	octopus& octopus = matrix[y][x];
 
 	octopus.energy += increment;
 
@@ -49,40 +50,40 @@ std::size_t invoke_flash_process(
 
 	if(!at_top_edge) {
 		// top left
-		if(!at_left_edge) flashes += invoke_flash_process(rows, (x - 1), (y - 1), true);
+		if(!at_left_edge) flashes += invoke_flash_process(matrix, (x - 1), (y - 1), true);
 
 		// top middle
-		flashes += invoke_flash_process(rows, x, (y - 1), true);
+		flashes += invoke_flash_process(matrix, x, (y - 1), true);
 
 		// top right
-		if(!at_right_edge) flashes += invoke_flash_process(rows, (x + 1), (y - 1), true);
+		if(!at_right_edge) flashes += invoke_flash_process(matrix, (x + 1), (y - 1), true);
 	}
 
 	// center left
-	if(!at_left_edge) flashes += invoke_flash_process(rows, (x - 1), y, true);
+	if(!at_left_edge) flashes += invoke_flash_process(matrix, (x - 1), y, true);
 
 	// center right
-	if(!at_right_edge) flashes += invoke_flash_process(rows, (x + 1), y, true);
+	if(!at_right_edge) flashes += invoke_flash_process(matrix, (x + 1), y, true);
 
 	if(!at_bottom_edge) {
 		// bottom left
-		if(!at_left_edge) flashes += invoke_flash_process(rows, (x - 1), (y + 1), true);
+		if(!at_left_edge) flashes += invoke_flash_process(matrix, (x - 1), (y + 1), true);
 
 		// bottom middle
-		flashes += invoke_flash_process(rows, x, (y + 1), true);
+		flashes += invoke_flash_process(matrix, x, (y + 1), true);
 
 		// bottom right
-		if(!at_right_edge) flashes += invoke_flash_process(rows, (x + 1), (y + 1), true);
+		if(!at_right_edge) flashes += invoke_flash_process(matrix, (x + 1), (y + 1), true);
 	}
 
 	return flashes;
 }
 
 aoc2021::ANSWER aoc2021::solution(std::istream& input) {
-	std::array<std::array<octopus, 10>, 10> rows;
+	array_matrix<octopus, 10> matrix;
 
 	char ch;
-	for(std::array<octopus, 10>& row : rows) {
+	for(std::array<octopus, 10>& row : matrix.rows()) {
 		for(octopus& octopus : row) {
 			input >> ch;
 			octopus.energy = digit_to_int(ch);
@@ -94,7 +95,7 @@ aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 	std::size_t new_flashes;
 
 	for(std::size_t step = 0; step < steps; ++step) {
-		for(std::array<octopus, 10>& row : rows) {
+		for(std::array<octopus, 10>& row : matrix.rows()) {
 			for(octopus& octopus : row) {
 				octopus.flashed_this_step = false;
 				++(octopus.energy);
@@ -104,18 +105,18 @@ aoc2021::ANSWER aoc2021::solution(std::istream& input) {
 		do {
 			flashed = false;
 
-			for(std::size_t y = 0; y < rows.size(); ++y) {
-				std::array<octopus, 10>& row = rows[y];
+			for(std::size_t y = 0; y < matrix.rows_count(); ++y) {
+				std::array<octopus, 10>& row = matrix[y];
 
 				for(std::size_t x = 0; x < row.size(); ++x) {
-					new_flashes = invoke_flash_process(rows, x, y, false);
+					new_flashes = invoke_flash_process(matrix, x, y, false);
 					flashed = (flashed || (new_flashes > 0));
 					total_flashes += new_flashes;
 				}
 			}
 		} while(flashed);
 
-		for(std::array<octopus, 10>& row : rows) {
+		for(std::array<octopus, 10>& row : matrix.rows()) {
 			for(octopus& octopus : row) {
 				if(octopus.flashed_this_step) {
 					octopus.energy = 0;
